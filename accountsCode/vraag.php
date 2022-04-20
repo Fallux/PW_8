@@ -1,6 +1,5 @@
 <?php
 include './dbConnection.php';
-include './vraag.php';
 
 if(!empty($_POST)) {
     $naam = $_POST["naam"];
@@ -9,7 +8,7 @@ if(!empty($_POST)) {
     $postcode = $_POST["postcode"];
     $telefoonnummer = $_POST["telefoonnummer"];
 
-    $sql = "INSERT INTO `users` (naam, wachtwoord, adres, postcode, telefoonnummer) VALUES ('{$naam}', '{$wachtwoord}', '{$adres}', '{$postcode}', '{$telefoonnummer}');";
+    $sql = "INSERT INTO `vragen` (vraagGebruiker, soortHulp) VALUES ('{$naam}', '{$wachtwoord}', '{$adres}', '{$postcode}', '{$telefoonnummer}');";
 
     if ($conn->query($sql) === TRUE) {
         // echo "Je bent aangemeld welkom!";
