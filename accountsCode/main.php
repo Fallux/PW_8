@@ -1,25 +1,6 @@
 <?php
-include './dbConnection.php';
-include './vraag.php';
-
-if(!empty($_POST)) {
-    $naam = $_POST["naam"];
-    $wachtwoord = md5($_POST["wachtwoord"]);
-    $adres = $_POST["adres"];
-    $postcode = $_POST["postcode"];
-    $telefoonnummer = $_POST["telefoonnummer"];
-
-    $sql = "INSERT INTO `users` (naam, wachtwoord, adres, postcode, telefoonnummer) VALUES ('{$naam}', '{$wachtwoord}', '{$adres}', '{$postcode}', '{$telefoonnummer}');";
-
-    if ($conn->query($sql) === TRUE) {
-        // echo "Je bent aangemeld welkom!";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-}
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,18 +8,25 @@ if(!empty($_POST)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <title>aanmelden</title>
+    <title>Nijmegen</title>
 </head>
 <body>
-    <form action="" method="post">
-        <div class="inputContainer">
-            <input type="text" name="naam" class="input" placeholder="Naam">
-            <input type="text" name="wachtwoord" class="input" placeholder="Wachtwoord">
-            <input type="text" name="adres" class="input" placeholder="Adres">
-            <input type="text" name="postcode" class="input" placeholder="Postcode">
-            <input type="text" name="telefoonnummer" class="input" placeholder="Telefoonnummer">
-            <input type="submit" value="Send">
+    <header>
+        <nav>
+            <a href="./registreren.php">registreren</a>
+            <a href="./vraag.php">vraag stellen</a>
+        </nav>
+    </header>
+    <main>
+        <div id="filterZoek">
+            <!--filter container  -->
+          
         </div>
-    </form>
+        <div class="boxInfo">
+        <?php
+            
+            ?>
+        </div>
+    </main>
 </body>
 </html>

@@ -1,17 +1,17 @@
 <?php
 include './dbConnection.php';
 
-if(!empty($_POST)) {
-    $naam = $_POST["naam"];
-    $wachtwoord = md5($_POST["wachtwoord"]);
-    $adres = $_POST["adres"];
-    $postcode = $_POST["postcode"];
-    $telefoonnummer = $_POST["telefoonnummer"];
 
-    $sql = "INSERT INTO `vragen` (vraagGebruiker, soortHulp) VALUES ('{$naam}', '{$wachtwoord}', '{$adres}', '{$postcode}', '{$telefoonnummer}');";
+
+
+if(!empty($_POST)) {
+    $vraagNaam = $_POST["vraagNaam"];
+    $soortHulp = $_POST["soortHulp"];
+
+    $sql = "INSERT INTO `vragen` (vraagGebruiker, soortHulp) VALUES ('{$vraagNaam}', '{$soortHulp}');";
 
     if ($conn->query($sql) === TRUE) {
-        // echo "Je bent aangemeld welkom!";
+        // header('Location: main.php');
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -26,17 +26,24 @@ if(!empty($_POST)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <title>aanmelden</title>
+    <title>vraag</title>
 </head>
 <body>
+    <a href="main.php">main</a>
+    <h2>Stel hier je vraag</h2>
     <form action="" method="post">
         <div class="inputContainer">
-            <input type="text" name="naam" class="input" placeholder="Naam">
-            <input type="text" name="wachtwoord" class="input" placeholder="Wachtwoord">
-            <input type="text" name="adres" class="input" placeholder="Adres">
-            <input type="text" name="postcode" class="input" placeholder="Postcode">
-            <input type="text" name="telefoonnummer" class="input" placeholder="Telefoonnummer">
-            <input type="submit" value="Send">
+            <input type="text" name="vraagNaam" class="input" placeholder="VraagNaam">
+            <input type="text" name="soortHulp" class="input" placeholder="SoortHulp">
+            <input type="submit" value="submit" name="submit">
+            <div>
+                <?php
+                if (isset($_POST['submit'])!='') {
+                    echo $_POST['vraagNaam'] . $soortHulp = $_POST["soortHulp"];
+                }
+                ?>
+            
+            </div>
         </div>
     </form>
 </body>
