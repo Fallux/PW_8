@@ -1,14 +1,54 @@
 <?php
 include './dbConnection.php';
 
+if (isset($_POST['submit']) && $_POST['submit'] != '') {
+    //default user: test@test.nl
+    //default password: test123
+    $token = $conn->real_escape_string($_GET['token']);
+    $password_1 = $conn->real_escape_string($_POST['password_1']);
+    $password_2 = $conn->real_escape_string($_POST['password_2']);
+    
+    $liqry = $conn->prepare("SELECT admin_user_id,email FROM admin_user WHERE password_token = ? LIMIT 1;");
+    if($liqry === false) {
+       echo mysqli_error($conn);
+    } else{
+        $liqry->bind_param('s',$token);
+        $liqry->bind_result($adminId,$email);
+        if($liqry->execute()){
+            $liqry->store_result();
+            $liqry->fetch();
+            if($liqry->num_rows == '1' && $password_1 == $password_2){
 
-
+                $password = password_hash($password_1, PASSWORD_DEFAULT);
+                
+                $query1 = $conn->prepare("UPDATE admin_user SET password = ?, password_token = '', password_changed = NOW() WHERE admin_user_id = ? LIMIT 1;");
+                if ($query1 === false) {
+                    echo mysqli_error($conn);
+                }
+                
+                $query1->bind_param('si',$password,$adminId);
+                if ($query1->execute() === false) {
+                    echo mysqli_error($conn);
+                } 
+                $query1->close();
+                
+                echo "Gelukt, u wordt doorgestuurd... <meta http-equiv=\"refresh\" content=\"2; URL=main.php\">";
+                exit();
+            } else {
+                echo "ERROR tijdens verzenden. Komen de wachtwoorden overeen?";
+            }
+        }
+        $liqry->close();
+    }
+}
 
 if(!empty($_POST)) {
     $vraagNaam = $_POST["vraagNaam"];
     $soortHulp = $_POST["soortHulp"];
+    $beschrijving = $_POST["beschrijving"];
+    $userID = $_SESSION['Sadmin_id'];
 
-    $sql = "INSERT INTO `vragen` (vraagGebruiker, soortHulp) VALUES ('{$vraagNaam}', '{$soortHulp}');";
+    $sql = "INSERT INTO `vraag` (id, userID, vraagGebruiker, soortHulp, beschrijving) VALUES (null, '{$userID}', '{$vraagNaam}', '{$soortHulp}', '{$beschrijving}');";
 
     if ($conn->query($sql) === TRUE) {
         // header('Location: main.php');
@@ -33,17 +73,10 @@ if(!empty($_POST)) {
     <h2>Stel hier je vraag</h2>
     <form action="" method="post">
         <div class="inputContainer">
-            <input type="text" name="vraagNaam" class="input" placeholder="VraagNaam">
-            <input type="text" name="soortHulp" class="input" placeholder="SoortHulp">
+            <input type="text" name="vraagNaam" class="input" placeholder="VraagNaam" required>
+            <input type="text" name="soortHulp" class="input" placeholder="SoortHulp" required>
+            <textarea name="beschrijving" id="input" placeholder="Beschrijving" required></textarea>
             <input type="submit" value="submit" name="submit">
-            <div>
-                <?php
-                if (isset($_POST['submit'])!='') {
-                    echo $_POST['vraagNaam'] . $soortHulp = $_POST["soortHulp"];
-                }
-                ?>
-            
-            </div>
         </div>
     </form>
 </body>

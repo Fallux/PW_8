@@ -4,12 +4,13 @@ include './dbConnection.php';
 
 if(!empty($_POST)) {
     $naam = $_POST["naam"];
-    $wachtwoord = md5($_POST["wachtwoord"]);
-    $adres = $_POST["adres"];
+    $wachtwoord = password_hash($_POST["wachtwoord"], PASSWORD_DEFAULT);
+    $email = $_POST["email"];
+    $plaats = $_POST["plaats"];
     $postcode = $_POST["postcode"];
-    $telefoonnummer = $_POST["telefoonnummer"];
+    $userType = $_POST["userType"];
 
-    $sql = "INSERT INTO `users` (naam, wachtwoord, adres, postcode, telefoonnummer) VALUES ('{$naam}', '{$wachtwoord}', '{$adres}', '{$postcode}', '{$telefoonnummer}');";
+    $sql = "INSERT INTO `users`(`id`, `naam`, `wachtwoord`, `email`, `plaats`, `postcode`, `userType`) VALUES (null,'{$naam}','{$wachtwoord}','{$email}','{$plaats}','{$postcode}', '{$userType}');";
 
     if ($conn->query($sql) === TRUE) {
         // echo "Je bent aangemeld welkom!";
@@ -35,11 +36,16 @@ if(!empty($_POST)) {
     <a href="main.php">terug</a>
     <form action="" method="post">
         <div class="inputContainer">
-            <input type="text" name="naam" class="input" placeholder="Naam">
-            <input type="text" name="wachtwoord" class="input" placeholder="Wachtwoord">
-            <input type="text" name="adres" class="input" placeholder="Adres">
-            <input type="text" name="postcode" class="input" placeholder="Postcode">
-            <input type="text" name="telefoonnummer" class="input" placeholder="Telefoonnummer">
+            <input type="text" name="naam" class="input" placeholder="Naam" required>
+            <input type="password" name="wachtwoord" class="input" placeholder="Wachtwoord" required>
+            <input type="email" name="email" class="input" placeholder="Email" required>
+            <input type="text" name="plaats" class="input" placeholder="Adres" required>
+            <input type="text" name="postcode" class="input" placeholder="Postcode" required>
+            <label for="userType" class="input">Wil je een hulpverlener of hulpzoeker zijn?</label>
+            <select class="userType" name="userType" required>
+            <option value="Hulpverlener">Hulpverlener</option>
+            <option value="Hulpzoeker">Hulpzoeker</option>
+            <option value="Hulp-verlener/zoeker">Hulp-verlener/zoeker</option>
             <input type="submit" value="Send">
         </div>
     </form>

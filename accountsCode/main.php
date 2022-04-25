@@ -1,5 +1,8 @@
 <?php
+include './dbConnection.php';
 
+// echo $_SESSION['Sadmin_email'];
+// echo $_SESSION['Sadmin_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +16,11 @@
 <body>
     <header>
         <nav>
+            <div class = "navLinks">
             <a href="./registreren.php">registreren</a>
-            <a href="./vraag.php">vraag stellen</a>
+            <a href="./login.php">login</a>
+            <a href="./vraag.php" id="vraag">vraag stellen</a>
+            </div>
         </nav>
     </header>
     <main>
@@ -49,11 +55,19 @@
         </form>
         <div class="vraagContainer">
         <h2>Vragen</h2>
-        <div class="boxInfo">
         <?php
+            $sql = "SELECT id, userID, soortHulp, vraagGebruiker FROM vraag";
+            $result = mysqli_query($conn, $sql);
             
+            if (mysqli_num_rows($result) > 0) {
+              // output data of each row
+              while($row = mysqli_fetch_assoc($result)) {
+                echo "<div class='boxInfo'>" . "Naam:" . $row["userID"] . " Soort hulp: " . $row["soortHulp"] . "<br>" . "De vraag: " . $row["vraagGebruiker"] . "</div>";
+              }
+            } else {
+              echo "0 results";
+            }
             ?>
-        </div>
         </div>
     </main>
 </body>
