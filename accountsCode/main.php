@@ -117,7 +117,7 @@ include './dbConnection.php';
                 <div>Op zoek naar een MaS stage</div>
                 </div>
                 <div class="col-sm">
-                One of three columns
+                <div></div>
                 </div>
                 <div class="col-sm">
                 One of three columns
