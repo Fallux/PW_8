@@ -56,3 +56,16 @@ h2 {
     float: left;
     margin: 2px;
 }
+#buttonBox{
+    margin-top: 300px;
+    /* margin-left: -500px;
+    height: 75px;
+    width: 150px; */
+}
+.btn {
+    margin-left: 100px;
+}
+#b1{
+    float: left;
+    margin-right: 200px;
+}
