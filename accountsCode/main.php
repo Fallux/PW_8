@@ -116,11 +116,15 @@ include './dbConnection.php';
                 <div>Nieuwsbrieven</div>
                 <div>Op zoek naar een MaS stage</div>
                 </div>
-                <div class="col-sm">
-                <div></div>
+                <div class="col-sm col3">
+                <div>Vrijwilligers account aanmaken</div>
+                <div>Organisatie account aanmaken</div>
+                <div>Veelgestelde vragen</div>
+                <div>Privacy Statement</div>
+                <div>Cookieverklaring</div>
                 </div>
                 <div class="col-sm">
-                One of three columns
+                <iframe src="https://www.facebook.com/vrijwilligershuisnieuwegein/" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
