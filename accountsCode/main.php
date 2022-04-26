@@ -54,11 +54,14 @@ include './dbConnection.php';
                  <!-- einde filter container tijdbesteding  -->
             <input type="submit" value="zoek">
         </form>
-        <!-- Sidebar -->
-        
+        <div id="artikelBox">
+        <div>
+        <h2>Vacatures</h2>  
 
 
-        <!-- Sidebar -->
+
+
+        </div>
 
         <div class="vraagContainer">
         <h2>Vragen</h2>
@@ -87,6 +90,7 @@ include './dbConnection.php';
                 
             </div>
         </div>
+    </div>
     </main>
     <footer>
         <hr>
@@ -124,7 +128,7 @@ include './dbConnection.php';
                 <div>Cookieverklaring</div>
                 </div>
                 <div class="col-sm">
-                <iframe src="https://www.facebook.com/vrijwilligershuisnieuwegein/" frameborder="0"></iframe>
+                <iframe src="https://www.facebook.com" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
