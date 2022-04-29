@@ -7,17 +7,19 @@ if (isset($_POST['submit']) && $_POST['submit'] != '') {
     $email = $conn->real_escape_string($_POST['email']);
     $wachtwoord_post = $conn->real_escape_string($_POST['wachtwoord']);
     
-    $liqry = $conn->prepare("SELECT id,email,wachtwoord FROM users WHERE email = ? LIMIT 1;");
+    $liqry = $conn->prepare("SELECT id,email,wachtwoord,userType,naam FROM users WHERE email = ? LIMIT 1;");
     if($liqry === false) {
         trigger_error(mysqli_error($conn));
     } else{
         $liqry->bind_param('s',$email);
-        $liqry->bind_result($id,$email,$wachtwoord);
+        $liqry->bind_result($id,$email,$wachtwoord,$gebruiker,$naam);
         if($liqry->execute()){
             $liqry->store_result();
             $liqry->fetch();
             if($liqry->num_rows == '1' && password_verify($wachtwoord_post, $wachtwoord)){
                 $_SESSION['Sadmin_id'] = $id;
+                $_SESSION['Sadmin_naam'] = $naam;
+                $_SESSION['Sadmin_gebruiker'] = $gebruiker;
                 $_SESSION['Sadmin_email'] = stripslashes($email);
                 echo "Bezig met inloggen... <meta http-equiv=\"refresh\" content=\"1; URL=main.php\">";
                 exit();
@@ -41,7 +43,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '') {
 <body>
     <a href="main.php">terug</a>
     <div class="inputContainer">
-        <form action="login.php" method="post">
+        <form action="" method="post">
             <input type="text" name="email" class="input" placeholder="Email" required>
             <input type="password" name="wachtwoord" class="input" placeholder="Wachtwoord" required>
             <input type="submit" name="submit" value="Login">

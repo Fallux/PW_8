@@ -47,11 +47,34 @@ main{
     /* margin-left: 306.013px; */
     margin-left: 150px;
 }
+
 h2 {
     margin-left: 25px;
 }
-.boxInfo{
+.vacatureContainer{
+    margin-top: 50px;
+    margin-bottom: 300px;
+}
+.vacatureBox{
     width: 250px;
+    height: 250px;
+    border: 3px solid red;
+    float: left;
+    margin: 2px;
+}
+.meerKnop{
+    float: right;
+    margin-right: 250px;
+    width: 150px;
+    height: 50px;
+    margin-bottom: 50px;
+}
+.vraagContainer{
+    float: clear;
+    margin-top: 345px;
+}
+.boxInfo{
+    width: 335px;
     height: 250px;
     border: 3px solid blue;
     float: left;
@@ -59,9 +82,13 @@ h2 {
 }
 #buttonBox{
     margin-top: 300px;
+    margin-left: 100px;
 }
 .btn {
+    width: 150px;
+    height: 50px;
     margin-left: 100px;
+    margin-top: 10px;
 }
 #b1{
     float: left;
@@ -69,4 +96,8 @@ h2 {
 }
 .col3{
     padding-top: 35px;
+}
+
+footer{
+    margin-bottom: 50px;
 }
